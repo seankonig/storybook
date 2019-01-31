@@ -5,6 +5,7 @@ const mongoose = require('mongoose');
 const cookieParser = require('cookie-parser');
 const session = require('express-session');
 const passport = require('passport');
+const path = require('path');
 
 // Load User Model
 require('./models/User');
@@ -15,6 +16,7 @@ require('./config/passport')(passport);
 // Load Routes
 const auth = require('./routes/auth');
 const index = require('./routes/index');
+const stories = require('./routes/stories');
 
 // Map global promises
 mongoose.Promise = global.Promise;
@@ -30,6 +32,8 @@ app.engine('handlebars', exphbs({
     defaultLayout: 'main'
 }))
 app.set('view engine', 'handlebars')
+
+app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(cookieParser());
 app.use(session({
@@ -49,6 +53,7 @@ app.use((req, res, next) => {
 })
 
 app.use('/', index);
+app.use('/stories', stories)
 app.use('/auth', auth);
 
 const port = process.env.PORT || 3000;
