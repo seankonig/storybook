@@ -1,4 +1,4 @@
-<div class="album py-5 bg-light">
+<div class="album py-5 bg-white">
     <div class="container">
 
         <div class="row">
@@ -43,15 +43,12 @@
                 <h4 class="d-flex justify-content-between align-items-center mb-3">
                     <span class="text-muted">Create Post</span>
                 </h4>
-                <form class="needs-validation" novalidate>
+                <form method="POST" action="/stories" class="needs-validation">
                     <div class="row">
                         <div class="col-md-6 mb-3">
                             <label for="firstName">Title</label>
                             <input type="text" class="form-control" id="title" name="title" placeholder="" value=""
                                 required>
-                            <div class="invalid-feedback">
-                                Valid first name is required.
-                            </div>
                         </div>
                     </div>
 
@@ -60,15 +57,12 @@
                     </h4>
 
                     <div class="col-md-5 mb-3">
-                        <select class="custom-select d-block w-100" id="country" required>
+                        <select class="custom-select d-block w-100" id="status" name="status" required>
                             <option value="">Choose...</option>
                             <option value="public">Public</option>
                             <option value="private">Private</option>
-                            <option value="unpublished">unpublished</option>
+                            <option value="unpublished">Unpublished</option>
                         </select>
-                        <div class="invalid-feedback">
-                            Please select a valid country.
-                        </div>
                     </div>
 
                     <h4 class="d-flex justify-content-between align-items-center mb-3">
@@ -76,18 +70,23 @@
                     </h4>
 
                     <div class="mb-3">
-                        <div class="input-group">
-                            <textarea class="form-control" id="username" placeholder="Username" required></textarea>
-                            <div class="invalid-feedback" style="width: 100%;">
-                                Your username is required.
-                            </div>
+                        <div>
+                            <textarea class="form-control" id="story" name="story" placeholder="Share your story"></textarea>
+                        </div>
+                    </div>
+                    <hr class="mb-4">
+
+                    <h4 class="mb-3">Allow Comment</h4>
+
+                    <div class="d-block my-3">
+                        <div class="custom-control custom-checkbox">
+                            <input type="checkbox" class="custom-control-input" name="allowComments" id="allowComments">
+                            <label class="custom-control-label" for="allowComments">Allow Comments</label>
                         </div>
                     </div>
 
-                    
-                    
                     <hr class="mb-4">
-                    <button class="btn btn-primary btn-lg btn-block" type="submit">Continue to checkout</button>
+                    <button class="btn btn-dark btn-lg btn-block" type="submit">Post</button>
                 </form>
             </div>
         </div>

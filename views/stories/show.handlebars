@@ -1,0 +1,27 @@
+<div class="album py-5 bg-white">
+    <div class="container">
+
+        <div class="row">
+
+            <div class="col-sm-12 blog-main">
+
+                <img src="https://picsum.photos/1080/360" class="img-fluid blog-image" alt="Responsive image">
+
+                <div class="blog-post">
+                    <h3 class="blog-post-title">{{story.title}}</h3>
+                    <p class="blog-post-meta">Posted: January 1, 2014 by <a href="#">{{user.firstName}} {{user.lastName}}</a></p>
+
+                    {{{story.story}}}
+                </div><!-- /.blog-post -->
+
+                
+
+                <nav class="blog-pagination">
+                    <a class="btn btn-outline-primary" href="#">Older</a>
+                    <a class="btn btn-outline-secondary disabled" href="#">Newer</a>
+                </nav>
+
+            </div><!-- /.blog-main -->
+        </div>
+    </div>
+</div>
