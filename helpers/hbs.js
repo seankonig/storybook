@@ -23,5 +23,9 @@ module.exports = {
 
     select: (selected, options) => {
         return options.fn(this).replace( new RegExp(' value=\"' + selected + '\"'), '$& selected="selected"').replace( new RegExp('>' + selected + '</option>'), 'selected="selected"$&');
+    },
+
+    getAge: (birthDate) => {
+        return Math.floor((new Date() - new Date(birthDate).getTime()) / 3.15576e+10);
     }
 };
