@@ -1,0 +1,58 @@
+<div class="album py-5 bg-white">
+    <div class="container">
+
+        <div class="row">
+            <div class="col-md-12 order-md-1">
+
+                <h4 class="d-flex justify-content-between align-items-center mb-3">
+                    <span class="text-muted">{{user.firstName}}'s Bio</span>
+                </h4>
+                <form method="POST" action="/user/edit/{{user._id}}?_method=PUT" class="needs-validation">
+                <input type="hidden" name="_method" value="PUT" />
+
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label for="username">Username</label>
+                            <input type="text" class="form-control" id="username" name="username" placeholder="{{user.username}}" value="{{user.username}}" required>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label for="location">Location</label>
+                            <input type="text" class="form-control" id="location" name="location" placeholder="" value="{{user.location}}" required>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label for="birthDate">Birth Date</label>
+                            <input type="date" class="form-control" id="birthDate" name="birthDate" value="{{formatDate user.birthDate 'YYYY-MM-DD'}}" required>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label for="website">Website</label>
+                            <input type="text" class="form-control" id="website" name="website" placeholder="" value="{{user.website}}" required>
+                        </div>
+                    </div>
+
+                    <h4 class="d-flex justify-content-between align-items-center mb-3">
+                        <span class="text-muted">Something about you</span>
+                    </h4>
+
+                    <div class="mb-3">
+                        <div>
+                            <textarea class="form-control" id="about" name="about" placeholder="Something about you">{{user.about}}</textarea>
+                        </div>
+                    </div>
+
+                    <hr class="mb-4">
+                    <button class="btn btn-dark btn-lg btn-block" type="submit">Update</button>
+                </form>
+                
+            </div>
+        </div>
+    </div>
+</div>

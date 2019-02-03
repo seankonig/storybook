@@ -60,7 +60,7 @@ router.post('/', (req, res) => {
         story: sanitizeHtml(req.body.story),
         status: req.body.status,
         allowComments,
-        user: req.user.id
+        user: req.user._id
     }
 
     new Story(newStory)
@@ -71,6 +71,28 @@ router.post('/', (req, res) => {
     .catch((err) => {
         console.log(err);
     });
+});
+
+router.put('/:id', (req, res) => {
+    let allowComments = req.body.allowComments === 'on' ? true : false;
+    Story.findOneAndUpdate({
+        _id: req.params.id
+    },
+        {
+            $set: {
+                title: req.body.title,
+                story: sanitizeHtml(req.body.story),
+                status: req.body.status,
+                website: req.body.website,
+                allowComments
+            }
+        })
+        .then((story) => {
+            res.redirect(`/stories/show/${story._id}`);
+        })
+        .catch((err) => {
+            console.log(err);
+        });
 });
 
 router.delete('/:id', (req, res) => {

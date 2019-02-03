@@ -16,13 +16,17 @@ router.get('/dashboard', ensureAuth, (req, res) => {
     Story.find({
         user: req.user._id
     })
-    .populate('user')
-    .then((stories) => {
-        res.render('index/dashboard', { stories });
-    })
-    .catch((err) => {
-        console.log(err);
-    })
+        .populate('user')
+        .then((stories) => {
+            if (req.user.birthDate === null) {
+                res.render('user/edit');
+            } else {
+                res.render('index/dashboard', { stories });
+            }
+        })
+        .catch((err) => {
+            console.log(err);
+        })
 });
 
 module.exports = router;

@@ -22,6 +22,7 @@ require('./config/passport')(passport);
 const auth = require('./routes/auth');
 const index = require('./routes/index');
 const stories = require('./routes/stories');
+const user = require('./routes/user');
 
 //handlebars helpers
 const {
@@ -33,6 +34,7 @@ const {
 
 // Map global promises
 mongoose.Promise = global.Promise;
+mongoose.set('useCreateIndex', true);
 // Mongoose Connect
 mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true, })
   .then(() => console.log('MongoDB Connected'))
@@ -82,7 +84,8 @@ app.use((req, res, next) => {
 
 app.use('/auth', auth);
 app.use('/', index);
-app.use('/stories', stories)
+app.use('/stories', stories);
+app.use('/user', user);
 
 const port = process.env.PORT || 3000;
 
