@@ -7,6 +7,7 @@ const session = require('express-session');
 const passport = require('passport');
 const path = require('path');
 const bodyParser = require('body-parser');
+const methodOverride = require('method-override');
 
 // Load User Model
 require('./models/User');
@@ -25,7 +26,9 @@ const stories = require('./routes/stories');
 //handlebars helpers
 const {
     truncate,
-    stripTags
+    stripTags,
+    formatDate,
+    select
 } = require('./helpers/hbs');
 
 // Map global promises
@@ -44,10 +47,15 @@ app.use(bodyParser.json());
 // create application/x-www-form-urlencoded parser
 app.use(bodyParser.urlencoded({ extended: false }));
 
+//Method Override Middleware
+app.use(methodOverride('_method'));
+
 app.engine('handlebars', exphbs({
     helpers: {
         truncate,
-        stripTags
+        stripTags,
+        formatDate,
+        select
     },
     defaultLayout: 'main'
 }))

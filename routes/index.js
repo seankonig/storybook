@@ -1,6 +1,9 @@
 const express = require('express');
 const router = express.Router();
-randomWords = require('random-words');
+const mongoose = require('mongoose');
+const Story = mongoose.model('stories');
+
+
 const { ensureAuth, ensureGuest } = require('../helpers/auth');
 
 router.get('/', ensureGuest, (req, res) => {
@@ -10,7 +13,16 @@ router.get('/', ensureGuest, (req, res) => {
 });
 
 router.get('/dashboard', ensureAuth, (req, res) => {
-    res.render('index/dashboard')
+    Story.find({
+        user: req.user._id
+    })
+    .populate('user')
+    .then((stories) => {
+        res.render('index/dashboard', { stories });
+    })
+    .catch((err) => {
+        console.log(err);
+    })
 });
 
 module.exports = router;

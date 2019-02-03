@@ -1,7 +1,8 @@
 const express = require('express');
 const mongoose = require('mongoose');
-const Story = mongoose.model('stories')
-const User = mongoose.model('users')
+var sanitizeHtml = require('sanitize-html');
+const Story = mongoose.model('stories');
+const User = mongoose.model('users');
 
 const router = express.Router();
 
@@ -17,11 +18,25 @@ router.get('/', (req, res) => {
     })
     .catch((err) => {
         console.log('no stories to show');
-    })    
+    });
 });
 
 router.get('/add', ensureAuth, (req, res) => {
     res.render('stories/add');
+});
+
+router.get('/edit/:id', ensureAuth, (req, res) => {
+    Story.findOne({
+        _id: req.params.id
+    })
+    .populate('user')
+    .then((story) => {
+        res.render('stories/edit', { story });
+    })
+    .catch((err) => {
+        console.log(err);
+    });
+    
 });
 
 router.get('/show/:id', (req, res) => {
@@ -30,12 +45,11 @@ router.get('/show/:id', (req, res) => {
     })
     .populate('user')
     .then((story) => {
-        console.log(story);
         res.render('stories/show', { story });
     })
     .catch((err) => {
         console.log(err);
-    })
+    });
 });
 
 router.post('/', (req, res) => {
@@ -43,7 +57,7 @@ router.post('/', (req, res) => {
     
     const newStory = {
         title: req.body.title,
-        story: req.body.story,
+        story: sanitizeHtml(req.body.story),
         status: req.body.status,
         allowComments,
         user: req.user.id
@@ -56,7 +70,23 @@ router.post('/', (req, res) => {
     })
     .catch((err) => {
         console.log(err);
+    });
+});
+
+router.delete('/:id', (req, res) => {
+    Story.findOneAndDelete({
+        _id: req.params.id
     })
-})
+    .then(() => {
+        res.redirect('/dashboard');
+    })
+    .catch((err) => {
+        console.log(err);
+    });
+    
+});
+
+
+
 
 module.exports = router;

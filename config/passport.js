@@ -29,7 +29,6 @@ module.exports = function (passport) {
             }).then(user => {
                 if (user) {
                     // Return user
-                    console.log('User already exists');
                     done(null, user);
                 } else {
                     // Create user

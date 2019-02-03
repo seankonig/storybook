@@ -9,12 +9,12 @@
 
                 <div class="blog-post">
                     <h3 class="blog-post-title">{{story.title}}</h3>
-                    <p class="blog-post-meta">Posted: January 1, 2014 by <a href="#">{{user.firstName}} {{user.lastName}}</a></p>
+                    <p class="blog-post-meta">Posted: {{formatDate story.date 'MMMM Do YYYY'}}</p>
 
                     {{{story.story}}}
                 </div><!-- /.blog-post -->
 
-                
+                <p class="blog-post-meta"><img src="{{user.image}}" class="blog-post-img"/> More by <a href="#">{{user.firstName}} {{user.lastName}}</a></p>
 
                 <nav class="blog-pagination">
                     <a class="btn btn-outline-primary" href="#">Older</a>

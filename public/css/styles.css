@@ -51,10 +51,19 @@ html, body {
     z-index: 1;
   }
 
+  /* a:link {
+    text-decoration: none;
+    color: 	#428bca;
+  }
+
+  a:visited {
+    text-decoration: none;
+    color: 	#5bc0de;
+  }
+
   a:hover, a:focus, a:active {
     text-decoration: none;
-    color: #fff;
-}
+    color: #353535; */
 
   .my-float{
     margin-top:12px;
@@ -72,6 +81,10 @@ html, body {
   
   .box-shadow { box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05); }
 
+  .card-content {
+    height: 250px;
+  }
+
   /* story card footer */
 
   .badge-custom {
@@ -87,9 +100,9 @@ html, body {
   }
 
   .badge-text {
-    font-size: 14px;
+    font-size: 12px;
     display: inline-block;
-    margin-left: 5%;
+    margin-left: 5px;
   }
 
 h1, .h1,
@@ -137,7 +150,6 @@ h6, .h6 {
   }
 }
 
-
 /*
  * Main column and sidebar layout
  */
@@ -183,8 +195,43 @@ h6, .h6 {
   font-size: 1.8rem;
 }
 .blog-post-meta {
+  display: inline-block;
   margin-bottom: 1.25rem;
   color: #999;
+}
+.blog-post-img {
+  display: inline-block;
+  max-width: 10%;
+  border-radius: 50%;
+}
+
+.table {
+  border-radius: 5px;
+  width: auto;
+  margin: 0 auto;
+}
+
+.dashboard-status {
+  text-transform: capitalize;
+}
+
+.btn-group a:hover {
+  font-size: 15px;
+  color: #f3f3f3;
+  text-decoration: none;
+}
+
+.dashboard-title a:link {
+  color: #333;
+}
+
+.dashboard-title a:visited {
+  color: #333;
+}
+
+.dashboard-title a:hover {
+  color: #333;
+  text-decoration: undeline;
 }
 
   
