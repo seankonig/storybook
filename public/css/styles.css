@@ -201,13 +201,28 @@ h6, .h6 {
   font-size: 1.8rem;
 }
 .blog-post-meta {
+  position: relative;
   display: inline-block;
   margin-bottom: 1.25rem;
   color: #999;
+  font-size: 14px;
+}
+.blog-post-meta-user {
+  position: relative;
+  display: inline-block;
+  margin-bottom: 1.25rem;
+  color: #999;
+  font-size: 14px;
+  left: 75%;
 }
 .blog-post-img {
   display: inline-block;
-  max-width: 10%;
+  max-width: 6%;
+  border-radius: 50%;
+}
+.blog-post-img-comment {
+  display: inline-block;
+  max-width: 8%;
   border-radius: 50%;
 }
 

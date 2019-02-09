@@ -14,9 +14,9 @@
               <div class="btn-group">
                 <a href="/stories/show/{{this._id}}" class="btn btn-sm btn-outline-secondary"><i class="fas fa-glasses"></i>
                   View</a>
-                  {{#if user}}
-                  {{{editButton this.user.id ../user.id this._id}}}
-                  {{/if}}               
+                {{#if user}}
+                  {{{editButton this.user.id ../user.id this.id}}}
+                  {{/if}}  
               </div>
             </div>
           </div>

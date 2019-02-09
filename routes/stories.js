@@ -13,6 +13,7 @@ router.get('/', (req, res) => {
         status: 'public'
     })
     .populate('user')
+    .sort({date: 'desc'})
     .then((stories) => {
         res.render('stories/index', { stories });
     })
@@ -22,7 +23,13 @@ router.get('/', (req, res) => {
 });
 
 router.get('/add', ensureAuth, (req, res) => {
-    res.render('stories/add');
+    Story.findOne({user: req.user._id}).sort({date: 'desc'}).limit(5)
+    .then((allStories) => {
+        res.render('stories/add', { allStories });
+    })
+    .catch((err) => {
+        console.log(err);
+    });
 });
 
 router.get('/edit/:id', ensureAuth, (req, res) => {
@@ -31,7 +38,17 @@ router.get('/edit/:id', ensureAuth, (req, res) => {
     })
     .populate('user')
     .then((story) => {
-        res.render('stories/edit', { story });
+        if (story.user.id != req.user.id){
+            res.redirect('/stories');
+        } else {
+            Story.find({user: req.user.id}).sort({date: 'desc'}).limit(5)
+            .then((allStories) => {
+                res.render('stories/edit', { story, allStories });
+            })
+            .catch((err) => {
+                console.log(err);
+            });
+        }
     })
     .catch((err) => {
         console.log(err);
@@ -44,7 +61,9 @@ router.get('/show/:id', (req, res) => {
         _id: req.params.id
     })
     .populate('user')
+    .populate('comments.commentUser')
     .then((story) => {
+        console.log(story.comments);
         res.render('stories/show', { story });
     })
     .catch((err) => {
@@ -83,12 +102,12 @@ router.put('/:id', (req, res) => {
                 title: req.body.title,
                 story: sanitizeHtml(req.body.story),
                 status: req.body.status,
-                website: req.body.website,
                 allowComments
             }
         })
+        .populate('user')
         .then((story) => {
-            res.redirect(`/stories/show/${story._id}`);
+            res.redirect('/stories/show/' + story._id);
         })
         .catch((err) => {
             console.log(err);
@@ -106,6 +125,27 @@ router.delete('/:id', (req, res) => {
         console.log(err);
     });
     
+});
+
+router.post('/comment/:id', (req, res) => {
+    const comment = {
+        commentBody: req.body.comment,
+        commentUser: req.user._id 
+    }
+    
+    Story.findOne({
+        _id: req.params.id
+    })
+    .then((story) => {
+        //push to story comment array
+        story.comments.unshift(comment);
+        story.save()
+        .then((story) => {
+            res.redirect(`/stories/show/${story._id}`)
+        })
+        .catch((err) => console.log(err));
+    })
+    .catch((err) => console.log(err));
 });
 
 

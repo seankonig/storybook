@@ -30,7 +30,9 @@ const {
     stripTags,
     formatDate,
     select,
-    getAge
+    getAge,
+    editButton,
+    editUser
 } = require('./helpers/hbs');
 
 // Map global promises
@@ -59,11 +61,13 @@ app.engine('handlebars', exphbs({
         stripTags,
         formatDate,
         select,
-        getAge
+        getAge,
+        editButton,
+        editUser
     },
     defaultLayout: 'main'
-}))
-app.set('view engine', 'handlebars')
+}));
+app.set('view engine', 'handlebars');
 
 app.use(express.static(path.join(__dirname, 'public')));
 

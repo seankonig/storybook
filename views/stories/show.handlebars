@@ -14,12 +14,40 @@
                     {{{story.story}}}
                 </div><!-- /.blog-post -->
 
-                <p class="blog-post-meta"><img src="{{user.image}}" class="blog-post-img"/> More by <a href="#">{{user.firstName}} {{user.lastName}}</a></p>
+                {{#if story.allowComments}}
+                <div class="row">
+                    <div class="col-md-8">
+                        <h6 class="mb-2 text-muted">Comments</h6>
+                        {{#each story.comments}}
+                        <div class="card mb-3">
+                            <div class="card-body">
+                                <span class="card-subtitle mb-2 text-muted"><img src="{{this.commentUser.image}}" class="blog-post-img-comment" /><span class="ml-2">{{this.commentUser.firstName}} {{this.commentUser.lastName}}</span></span>
+                                <p class="card-text text-muted mt-2">{{this.commentBody}}</p>
+                                <p class="blog-post-meta">Posted: {{formatDate this.commentDate 'LLLL'}}</p>
+                            </div>
+                        </div>
+                        {{/each}}
+                        <h5 class="mb-3">Post a Comment</h5>
+                        <form method="POST" action="/stories/comment/{{story._id}}">
+                            <div class="align-items-center">
+                                <div class="col-auto mb-3">
+                                    <textarea class="form-control mb-2" id="comment-box" name="comment"></textarea>
+                                </div>
 
-                <nav class="blog-pagination">
-                    <a class="btn btn-outline-primary" href="#">Older</a>
-                    <a class="btn btn-outline-secondary disabled" href="#">Newer</a>
-                </nav>
+                                <div class="col-auto">
+                                    <button type="submit" class="btn btn-secondary">Post Comment</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                {{else}}
+                <h5 class="mb-3">Please log in to comment</h5>
+                {{/if}}
+
+                <span class="blog-post-meta-user"><img src="{{story.user.image}}" class="blog-post-img" /> More by <a
+                        href="/user/posts/{{story.user._id}}">{{story.user.firstName}}
+                        {{story.user.lastName}}</a></span>
 
             </div><!-- /.blog-main -->
         </div>

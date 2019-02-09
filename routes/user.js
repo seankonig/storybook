@@ -12,8 +12,8 @@ router.get('/:id', ensureAuth, (req, res) => {
     User.findOne({
         _id: req.params.id
     })
-        .then((user) => {
-            res.render('user/index', { user });
+        .then((profile) => {
+            res.render('user/index', { profile });
         })
         .catch((err) => {
             console.log('cannot find user');
@@ -49,7 +49,22 @@ router.put('/edit/:id', ensureAuth, (req, res) => {
             res.render('user/index', { user });
         })
         .catch((err) => {
-            console.log('cannot find user');
+            console.log(err);
         });
 });
+
+
+router.get('/posts/:id', (req, res) => {
+    console.log(req.params);
+    Story.find({
+        user: req.params.id
+    })
+    .populate('user')
+    .then((stories) => {
+        res.render('user/posts', { stories });
+    })
+    .catch((err) => {
+        console.log(err);
+    })
+})
 module.exports = router;

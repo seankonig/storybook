@@ -4,13 +4,13 @@
         <div class="row">
             <div class="col-sm-12">
 
-                <div id="user-profile-2" class="user-profile">
+                <div id="profile-profile-2" class="profile-profile">
                     <div class="tabbable">
                         <ul class="nav nav-tabs padding-18">
                             <li class="active">
                                 <a data-toggle="tab" href="#home">
-                                    <i class="far fa-user"></i>
-                                    {{user.firstName}} {{user.lastName}}
+                                    <i class="far fa-profile"></i>
+                                    {{profile.firstName}} {{profile.lastName}}
                                 </a>
                             </li>
 
@@ -23,7 +23,7 @@
 
                             <li>
                                 <a data-toggle="tab" href="#friends">
-                                    <i class="blue ace-icon fa fa-users bigger-120"></i>
+                                    <i class="blue ace-icon fa fa-profiles bigger-120"></i>
                                     Friends
                                 </a>
                             </li>
@@ -41,35 +41,25 @@
                                 <div class="row">
                                     <div class="col-xs-12 col-sm-3 center">
                                         <span class="profile-picture">
-                                            <img class="img-size img-responsive" alt=" Avatar" id="avatar2" src="{{user.image}}">
+                                            <img class="img-size img-responsive" alt=" Avatar" id="avatar2" src="{{profile.image}}">
                                         </span>
 
                                         <div class="space space-4"></div>
 
-                                        <a href="#" class="btn btn-sm btn-block btn-success">
-                                            <i class="fas fa-plus"></i>
-                                            <span >Add as a friend</span>
-                                        </a>
+                                        {{#if user}}
+                                        {{{editUser profile.id user.id}}}
+                                        {{/if}}
 
-                                        <a href="/user/edit/{{user._id}}" class="btn btn-sm btn-block btn-danger">
-                                            <i class="fas fa-user-edit"></i>
-                                            <span >Edit Profile</span>
-                                        </a>
-
-                                        <a href="#" class="btn btn-sm btn-block btn-primary">
-                                            <i class="far fa-comments"></i>
-                                            <span >Send a message</span>
-                                        </a>
                                     </div><!-- /.col -->
 
                                     <div class="col-xs-12 col-sm-9">
 
-                                        <div class="profile-user-info">
+                                        <div class="profile-profile-info">
                                             <div class="profile-info-row">
                                                 <div class="profile-info-name"> Name: </div>
 
                                                 <div class="profile-info-value">
-                                                    <span>{{user.firstName}} {{user.lastName}}</span>
+                                                    <span>{{profile.firstName}} {{profile.lastName}}</span>
                                                 </div>
                                             </div>
 
@@ -78,7 +68,7 @@
 
                                                 <div class="profile-info-value">
                                                     <i class="fas fa-plane"></i>
-                                                    <span>{{user.location}}</span>
+                                                    <span>{{profile.location}}</span>
                                                 </div>
                                             </div>
 
@@ -86,7 +76,7 @@
                                                 <div class="profile-info-name"> Age </div>
 
                                                 <div class="profile-info-value">
-                                                    <span>{{getAge user.birthDate}}</span>
+                                                    <span>{{getAge profile.birthDate}}</span>
                                                 </div>
                                             </div>
 
@@ -94,7 +84,7 @@
                                                 <div class="profile-info-name"> BirthDate </div>
 
                                                 <div class="profile-info-value">
-                                                    <span>{{formatDate user.birthDate 'YYYY-MM-DD'}}</span>
+                                                    <span>{{formatDate profile.birthDate 'YYYY-MM-DD'}}</span>
                                                 </div>
                                             </div>
 
@@ -103,12 +93,12 @@
 
                                         <div class="hr hr-8 dotted"></div>
 
-                                        <div class="profile-user-info">
+                                        <div class="profile-profile-info">
                                             <div class="profile-info-row">
                                                 <div class="profile-info-name"> Website </div>
 
                                                 <div class="profile-info-value">
-                                                    <a href="#" target="_blank">{{user.website}}</a>
+                                                    <a href="#" target="_blank">{{profile.website}}</a>
                                                 </div>
                                             </div>
 
@@ -124,14 +114,14 @@
                                             <div class="widget-header widget-header-small">
                                                 <h4 class="widget-title smaller">
                                                     <i class="ace-icon fa fa-check-square-o bigger-110"></i>
-                                                    about {{user.firstName}}...
+                                                    about {{profile.firstName}}...
                                                 </h4>
                                             </div>
 
                                             <div class="widget-body">
                                                 <div class="widget-main">
                                                     
-                                                    {{{user.about}}}
+                                                    {{{profile.about}}}
 
                                                 </div>
                                             </div>

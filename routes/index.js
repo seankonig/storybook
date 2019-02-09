@@ -17,6 +17,7 @@ router.get('/dashboard', ensureAuth, (req, res) => {
         user: req.user._id
     })
         .populate('user')
+        .sort({date: 'desc'})
         .then((stories) => {
             if (req.user.birthDate === null) {
                 res.render('user/edit');
