@@ -23,8 +23,9 @@ router.get('/', (req, res) => {
 });
 
 router.get('/add', ensureAuth, (req, res) => {
-    Story.findOne({user: req.user._id}).sort({date: 'desc'}).limit(5)
+    Story.find({user: req.user._id}).sort({date: 'desc'}).limit(5)
     .then((allStories) => {
+        console.log(allStories);
         res.render('stories/add', { allStories });
     })
     .catch((err) => {
